@@ -27,7 +27,7 @@ html, body {
 }
 
 .main-content {
-  padding-top: 16vh;
+  padding-top: 100vh;
   min-height: 100vh;
 }
 </style>

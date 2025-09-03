@@ -206,7 +206,7 @@ export default {
 
 .hero-widget:first-child {
   margin-top: -10vh; /* Поднимает только первый виджет */
-  padding-top: 2rem; /* Уменьшает отступ сверху */
+  padding-top: 15vh; /* Уменьшает отступ сверху */
 }
 
 .hero-widget {
