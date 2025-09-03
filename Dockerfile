@@ -9,7 +9,7 @@ RUN npm run build
 # Backend build stage
 FROM golang:1.21-alpine as backend-build
 WORKDIR /app/backend
-COPY backend/go.mod backend/go.sum ./
+COPY backend/go.mod ./
 RUN go mod download
 COPY backend/ .
 RUN CGO_ENABLED=0 GOOS=linux go build -o main .
