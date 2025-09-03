@@ -6,8 +6,8 @@ RUN npm install
 COPY frontend/ .
 RUN npm run build
 
-# Backend build stage
-FROM golang:1.21-alpine as backend-build
+# Backend build stage - ОБНОВЛЕНО до Go 1.23
+FROM golang:1.23-alpine as backend-build
 WORKDIR /app/backend
 COPY backend/go.mod ./
 RUN go mod download
