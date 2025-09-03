@@ -14,10 +14,24 @@ RUN go mod download
 COPY backend/ .
 RUN CGO_ENABLED=0 GOOS=linux go build -o main .
 
-# Production stage - используем Alpine 3.22 (уже имеет сертификаты)
-FROM alpine:3.22 as production
-WORKDIR /app
-COPY --from=frontend-build /app/frontend/dist ./frontend/dist
-COPY --from=backend-build /app/backend/main .
-EXPOSE 8080
-CMD ["./main"]
+# Production stage - используем nginx для фронтенда и запускаем бэкенд
+FROM nginx:alpine as production
+
+# Копируем собранный фронтенд в nginx
+COPY --from=frontend-build /app/frontend/dist /usr/share/nginx/html
+
+# Копируем nginx конфиг
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Копируем бэкенд бинарник
+COPY --from=backend-build /app/backend/main /app/main
+
+# Делаем бэкенд исполняемым
+RUN chmod +x /app/main
+
+# Запускаем и бэкенд и nginx через скрипт
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+EXPOSE 80
+CMD ["/app/start.sh"]
