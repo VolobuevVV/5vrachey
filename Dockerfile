@@ -1,5 +1,5 @@
-# Frontend build stage
-FROM node:18-alpine as frontend-build
+# Frontend build stage - используем Node.js 20
+FROM node:20-alpine as frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
