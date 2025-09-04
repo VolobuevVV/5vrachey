@@ -1,7 +1,5 @@
 <template>
   <section class="hero-section">
-    <!-- Пустое пространство 20% сверху -->
-    <div class="top-spacer"></div>
 
     <!-- Основной контент HeroSection -->
     <div class="hero-main">
@@ -80,12 +78,6 @@ export default {
   position: relative;
 }
 
-/* Пустое пространство 20% сверху */
-.top-spacer {
-  height: 80vh;
-  width: 100%;
-}
-
 .hero-main {
   min-height: 80vh; /* Остальные 80% */
   display: flex;
@@ -97,9 +89,8 @@ export default {
 
 .hero-container {
   width: 100%;
-  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 5vw;
 }
 
 .hero-content {
@@ -181,14 +172,14 @@ export default {
 }
 
 .white-square {
-  width: 700px;
-  height: 480px;
+  width: 50vw;
+  height: 64vh;
   background: white;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.04);
   margin-right: -1rem;
 }
 
@@ -259,8 +250,9 @@ export default {
   font-size: 1.1rem;
 }
 
-/* Адаптивность */
+
 @media (max-width: 1024px) {
+
   .hero-content {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -275,12 +267,6 @@ export default {
     justify-content: center;
   }
 
-  .white-square {
-    margin-right: 0;
-    width: 380px;
-    height: 380px;
-  }
-
   .hero-title {
     font-size: 2.8rem;
   }
@@ -291,12 +277,9 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .top-spacer {
-    height: 15vh;
-  }
 
   .hero-main {
-    min-height: 85vh;
+    min-height: 110vh;
   }
 
   .hero-container {
@@ -305,11 +288,6 @@ export default {
 
   .hero-title {
     font-size: 2.3rem;
-  }
-
-  .white-square {
-    width: 300px;
-    height: 300px;
   }
 
   .hero-widget {

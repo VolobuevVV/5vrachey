@@ -43,9 +43,4 @@ export default {
   pointer-events: none;
 }
 
-@media (max-width: 768px) {
-  .top-panel {
-    height: 4vh;
-  }
-}
 </style>
