@@ -131,7 +131,7 @@ export default {
 
 .hero-appointment-btn {
   padding: 1.1rem 2.2rem;
-  background: rgb(5, 89, 104);
+  background: rgb(6, 113, 130);
   color: white;
   border: none;
   border-radius: 50px;
@@ -153,15 +153,15 @@ export default {
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0.7);
+    box-shadow: 0 0 0 0 rgba(6, 113, 130, 0.7);
   }
   50% {
     transform: scale(1.03);
-    box-shadow: 0 0 0 10px rgba(5, 89, 104, 0);
+    box-shadow: 0 0 0 10px rgba(6, 113, 130, 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0);
+    box-shadow: 0 0 0 0 rgba(6, 113, 130, 0);
   }
 }
 
@@ -339,15 +339,15 @@ export default {
 @keyframes pulse-mobile {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0.7);
+    box-shadow: 0 0 0 0 rgba(6, 113, 130, 0.7);
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 0 8px rgba(5, 89, 104, 0);
+    box-shadow: 0 0 0 8px rgba(6, 113, 130, 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0);
+    box-shadow: 0 0 0 0 rgba(6, 113, 130, 0);
   }
 }
 
@@ -360,15 +360,15 @@ export default {
 @keyframes pulse-small {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0.7);
+    box-shadow: 0 0 0 0 rgba(6, 113, 130, 0.7);
   }
   50% {
     transform: scale(1.01);
-    box-shadow: 0 0 0 6px rgba(5, 89, 104, 0);
+    box-shadow: 0 0 0 6px rgba(6, 113, 130, 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0);
+    box-shadow: 0 0 0 0 rgba(6, 113, 130, 0);
   }
 }
 </style>
