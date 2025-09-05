@@ -1,5 +1,7 @@
 <template>
-  <div :class="{ 'hidden': isScrolled }" class="top-panel"></div>
+  <div :class="{ 'hidden': isScrolled }" class="top-panel">
+    <div class="discount-text">Скидка 20% на первое посещение</div>
+  </div>
 </template>
 
 <script>
@@ -31,10 +33,21 @@ export default {
   left: 0;
   width: 100%;
   height: 4vh;
-  min-height: 30px;
-  background-color: rgb(0, 52, 73);
+  min-height: 20px;
+  background-color: rgb(6, 113, 133);
   z-index: 1001;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discount-text {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 680;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .top-panel.hidden {
@@ -43,4 +56,24 @@ export default {
   pointer-events: none;
 }
 
+/* Адаптивность */
+@media (max-width: 768px) {
+  .discount-text {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .discount-text {
+    font-size: 0.7rem;
+    white-space: normal;
+    padding: 0 0.5rem;
+    line-height: 1.2;
+  }
+
+  .top-panel {
+    min-height: 25px;
+    height: 4vh;
+  }
+}
 </style>

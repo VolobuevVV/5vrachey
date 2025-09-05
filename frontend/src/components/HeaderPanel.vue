@@ -4,7 +4,11 @@
       <div class="header-content">
         <!-- Логотип -->
         <div class="logo-section">
-          <h2 class="logo-text">5 ВРАЧЕЙ</h2>
+          <img
+            src="@/assets/images/logo.png"
+            alt="Медицинский центр 5 ВРАЧЕЙ"
+            class="logo-image"
+          >
         </div>
 
         <!-- Бургер меню для мобильных -->
@@ -96,18 +100,18 @@ export default {
   top: 4vh;
   left: 0;
   width: 100%;
-  min-height: 80px;
-  background-color: rgb(213, 238, 241);
+  height: 17vh;
+  min-height: 20px;
+  background-color: white;
   transition: all 0.3s ease;
   z-index: 1000;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
 }
 
 .header-panel.scrolled {
   top: 0;
   background-color: white !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
 }
 
 .header-container {
@@ -124,37 +128,28 @@ export default {
   width: 100%;
 }
 
-.logo-text {
-  margin: 0;
-  color: #2c3e50;
-  font-weight: 700;
-  font-size: 1.8rem;
-  white-space: nowrap;
-  z-index: 1002;
-}
-
 /* Бургер меню */
 .burger-menu {
   display: none;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.4rem;
   z-index: 1002;
 }
 
 .burger-menu span {
-  width: 25px;
-  height: 3px;
-  background: rgb(0, 52, 73);
+  width: 22px;
+  height: 2.5px;
+  background: rgb(6, 113, 133);
   transition: all 0.3s ease;
   transform-origin: center;
 }
 
 .header-panel.menu-open .burger-menu span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .header-panel.menu-open .burger-menu span:nth-child(2) {
@@ -162,7 +157,7 @@ export default {
 }
 
 .header-panel.menu-open .burger-menu span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* Правая секция */
@@ -170,7 +165,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.8rem;
+  gap: 0.6rem;
   flex: 1;
 }
 
@@ -183,17 +178,17 @@ export default {
 .phones-buttons {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .phone-numbers {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.2rem;
 }
 
 .phone {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #2c3e50;
   white-space: nowrap;
@@ -207,41 +202,41 @@ export default {
 
 .buttons-section {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   white-space: nowrap;
 }
 
 .location-btn, .appointment-btn {
-  padding: 0.6rem 1.5rem;
-  border: 2px solid rgb(0, 52, 73);
-  border-radius: 25px;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid rgb(6, 113, 133);
+  border-radius: 20px;
   background: transparent;
-  color: rgb(0, 52, 73);
+  color: rgb(6, 113, 133);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .appointment-btn {
-  background: rgb(0, 52, 73);
+  background: rgb(6, 113, 133);
   color: white;
 }
 
 .location-btn:hover {
-  background: rgba(0, 52, 73, 0.9);
+  background: rgba(6, 113, 133, 0.9);
   color: white;
 }
 
 .appointment-btn:hover {
-  background: rgba(0, 52, 73, 0.9);
-  border-color: rgba(0, 52, 73, 0.9);
+  background: rgba(6, 113, 133, 0.9);
+  border-color: rgba(6, 113, 133, 0.9);
 }
 
 /* Навигация */
 .navigation-section {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
@@ -250,15 +245,15 @@ export default {
   text-decoration: none;
   color: #2c3e50;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   transition: all 0.3s ease;
-  padding: 0.3rem 0;
+  padding: 0.2rem 0;
   position: relative;
 }
 
 .navigation-section a:hover {
-  color: rgb(0, 52, 73);
+  color: rgb(6, 113, 133);
 }
 
 .navigation-section a:hover::after {
@@ -267,8 +262,25 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;
-  background: rgb(0, 52, 73);
+  height: 1.5px;
+  background: rgb(6, 113, 133);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 10vh;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* Стили для скролла */
+.header-panel.scrolled .logo-image {
+  height: 8vh;
 }
 
 /* Адаптивность для планшетов */
@@ -278,27 +290,32 @@ export default {
   }
 
   .phones-buttons {
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
   .navigation-section {
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
-  .logo-text {
-    font-size: 1.6rem;
+  .logo-image {
+    height: 10vh;
+  }
+
+  .header-panel.scrolled .logo-image {
+    height: 8vh;
   }
 }
 
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .header-panel {
-    top: 4vh;
-    padding: 0.8rem 0;
+    top: 3vh;
+    padding: 0.6rem 0;
+    min-height: 60px;
   }
 
   .header-panel.scrolled {
-    padding: 0.4rem 0;
+    padding: 0.3rem 0;
   }
 
   .header-container {
@@ -319,10 +336,10 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     transition: left 0.3s ease;
     z-index: 1001;
-    padding: 2rem;
+    padding: 1.5rem;
   }
 
   .header-panel.menu-open .right-section {
@@ -335,81 +352,57 @@ export default {
 
   .phones-buttons {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.2rem;
     align-items: center;
   }
 
   .phone-numbers {
     align-items: center;
     text-align: center;
-  }
-
-  .phone {
-    font-size: 1.1rem;
-  }
-
-  .buttons-section {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .location-btn, .appointment-btn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    width: 250px;
-    text-align: center;
-  }
-
-  .navigation-section {
-    flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
-  }
-
-  .navigation-section a {
-    font-size: 1.2rem;
-    padding: 0.5rem 0;
-  }
-
-  .logo-text {
-    font-size: 1.4rem;
-  }
-}
-
-/* Адаптивность для маленьких мобильных */
-@media (max-width: 480px) {
-  .header-panel {
-    top: 3vh;
-    min-height: 60px;
-  }
-
-  .logo-text {
-    font-size: 1.2rem;
+    gap: 0.3rem;
   }
 
   .phone {
     font-size: 1rem;
+  }
+
+  .buttons-section {
+    flex-direction: column;
+    gap: 0.8rem;
   }
 
   .location-btn, .appointment-btn {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
     width: 220px;
+    text-align: center;
+  }
+
+  .navigation-section {
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: center;
   }
 
   .navigation-section a {
     font-size: 1.1rem;
+    padding: 0.4rem 0;
   }
 
-  .right-section {
-    padding: 1.5rem;
+  .logo-image {
+    height: 10vh;
+  }
+
+  .header-panel.scrolled .logo-image {
+    height: 8vh;
   }
 }
 
-/* Адаптивность для очень маленьких экранов */
-@media (max-width: 360px) {
-  .logo-text {
-    font-size: 1.1rem;
+/* Адаптивность для маленьких мобильных */
+@media (max-width: 480px) {
+  .header-panel {
+    top: 2.5vh;
+    min-height: 55px;
   }
 
   .phone {
@@ -424,6 +417,44 @@ export default {
 
   .navigation-section a {
     font-size: 1rem;
+  }
+
+  .right-section {
+    padding: 1.2rem;
+    gap: 1.2rem;
+  }
+
+  .logo-image {
+    height: 8vh;
+  }
+
+  .header-panel.scrolled .logo-image {
+    height: 6vh;
+  }
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 360px) {
+  .phone {
+    font-size: 0.85rem;
+  }
+
+  .location-btn, .appointment-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    width: 180px;
+  }
+
+  .navigation-section a {
+    font-size: 0.9rem;
+  }
+
+  .logo-image {
+    height: 8vh;
+  }
+
+  .header-panel.scrolled .logo-image {
+    height: 6vh;
   }
 }
 </style>

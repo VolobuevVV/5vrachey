@@ -131,7 +131,7 @@ export default {
 
 .hero-appointment-btn {
   padding: 1.1rem 2.2rem;
-  background: rgb(0, 52, 73);
+  background: rgb(5, 89, 104);
   color: white;
   border: none;
   border-radius: 50px;
@@ -141,11 +141,28 @@ export default {
   transition: all 0.3s ease;
   text-transform: uppercase;
   white-space: nowrap;
+  animation: pulse 2s infinite;
 }
 
 .hero-appointment-btn:hover {
   background: rgba(0, 52, 73, 0.9);
   transform: translateY(-2px);
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0.7);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 10px rgba(5, 89, 104, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0);
+  }
 }
 
 .hero-phone {
@@ -312,6 +329,46 @@ export default {
 
   .service-item {
     padding: 1.2rem;
+  }
+
+  .hero-appointment-btn {
+    animation: pulse-mobile 2s infinite;
+  }
+}
+
+@keyframes pulse-mobile {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0.7);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 8px rgba(5, 89, 104, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-appointment-btn {
+    animation: pulse-small 2s infinite;
+  }
+}
+
+@keyframes pulse-small {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0.7);
+  }
+  50% {
+    transform: scale(1.01);
+    box-shadow: 0 0 0 6px rgba(5, 89, 104, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(5, 89, 104, 0);
   }
 }
 </style>
