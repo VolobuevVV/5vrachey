@@ -2,7 +2,6 @@
   <header :class="{ 'scrolled': isScrolled, 'menu-open': isMenuOpen }" class="header-panel">
     <div class="header-container">
       <div class="header-content">
-        <!-- Логотип -->
         <div class="logo-section">
           <img
             src="@/assets/images/logo.png"
@@ -11,16 +10,13 @@
           >
         </div>
 
-        <!-- Бургер меню для мобильных -->
         <button class="burger-menu" @click="toggleMenu">
           <span></span>
           <span></span>
           <span></span>
         </button>
 
-        <!-- Правая часть - телефоны, кнопки и навигация -->
         <div class="right-section">
-          <!-- Телефоны и кнопки -->
           <div class="top-row">
             <div class="phones-buttons">
               <div class="phone-numbers">
@@ -34,13 +30,10 @@
             </div>
           </div>
 
-          <!-- Навигация -->
           <nav class="navigation-section">
-            <a href="#about" @click="closeMenu">О ЦЕНТРЕ</a>
+            <a href="#about" @click="closeMenu">О центре</a>
             <a href="#doctors" @click="closeMenu">Врачи</a>
             <a href="#departments" @click="closeMenu">Отделения</a>
-            <a href="#programs" @click="closeMenu">Программы</a>
-            <a href="#promotions" @click="closeMenu">Акции</a>
             <a href="#prices" @click="closeMenu">Цены</a>
             <a href="#patients" @click="closeMenu">Пациентам</a>
             <a href="#contacts" @click="closeMenu">Контакты</a>
@@ -101,17 +94,18 @@ export default {
   left: 0;
   width: 100%;
   height: 17vh;
-  min-height: 20px;
+  min-height: 100px;
   background-color: white;
   transition: all 0.3s ease;
   z-index: 1000;
   padding: 0.8rem 0;
+  box-shadow: 0 2px 25px rgba(0, 0, 0, 0.08);
 }
 
 .header-panel.scrolled {
   top: 0;
   background-color: white !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 25px rgba(0, 0, 0, 0.08);
 }
 
 .header-container {
@@ -128,7 +122,6 @@ export default {
   width: 100%;
 }
 
-/* Бургер меню */
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -142,7 +135,7 @@ export default {
 
 .burger-menu span {
   width: 22px;
-  height: 2.5px;
+  height: 3px;
   background: rgb(6, 113, 133);
   transition: all 0.3s ease;
   transform-origin: center;
@@ -160,7 +153,6 @@ export default {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Правая секция */
 .right-section {
   display: flex;
   flex-direction: column;
@@ -233,7 +225,6 @@ export default {
   border-color: rgba(6, 113, 133, 0.9);
 }
 
-/* Навигация */
 .navigation-section {
   display: flex;
   gap: 1.5rem;
@@ -243,9 +234,9 @@ export default {
 
 .navigation-section a {
   text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  font-size: 0.9rem;
+  color: #003449;
+  font-weight: 510;
+  font-size: 1rem;
   white-space: nowrap;
   transition: all 0.3s ease;
   padding: 0.2rem 0;
@@ -262,7 +253,7 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1.5px;
+  height: 3px;
   background: rgb(6, 113, 133);
 }
 
@@ -278,35 +269,10 @@ export default {
   transition: all 0.3s ease;
 }
 
-/* Стили для скролла */
 .header-panel.scrolled .logo-image {
   height: 8vh;
 }
 
-/* Адаптивность для планшетов */
-@media (max-width: 1024px) {
-  .header-container {
-    padding: 0 1.5rem;
-  }
-
-  .phones-buttons {
-    gap: 1.2rem;
-  }
-
-  .navigation-section {
-    gap: 1.2rem;
-  }
-
-  .logo-image {
-    height: 10vh;
-  }
-
-  .header-panel.scrolled .logo-image {
-    height: 8vh;
-  }
-}
-
-/* Адаптивность для мобильных */
 @media (max-width: 768px) {
   .header-panel {
     top: 3vh;
@@ -385,7 +351,7 @@ export default {
   }
 
   .navigation-section a {
-    font-size: 1.1rem;
+    font-size: 2rem;
     padding: 0.4rem 0;
   }
 
@@ -395,66 +361,6 @@ export default {
 
   .header-panel.scrolled .logo-image {
     height: 8vh;
-  }
-}
-
-/* Адаптивность для маленьких мобильных */
-@media (max-width: 480px) {
-  .header-panel {
-    top: 2.5vh;
-    min-height: 55px;
-  }
-
-  .phone {
-    font-size: 0.9rem;
-  }
-
-  .location-btn, .appointment-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
-    width: 200px;
-  }
-
-  .navigation-section a {
-    font-size: 1rem;
-  }
-
-  .right-section {
-    padding: 1.2rem;
-    gap: 1.2rem;
-  }
-
-  .logo-image {
-    height: 8vh;
-  }
-
-  .header-panel.scrolled .logo-image {
-    height: 6vh;
-  }
-}
-
-/* Адаптивность для очень маленьких экранов */
-@media (max-width: 360px) {
-  .phone {
-    font-size: 0.85rem;
-  }
-
-  .location-btn, .appointment-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-    width: 180px;
-  }
-
-  .navigation-section a {
-    font-size: 0.9rem;
-  }
-
-  .logo-image {
-    height: 8vh;
-  }
-
-  .header-panel.scrolled .logo-image {
-    height: 6vh;
   }
 }
 </style>

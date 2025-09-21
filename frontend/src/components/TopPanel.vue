@@ -56,24 +56,4 @@ export default {
   pointer-events: none;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  .discount-text {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .discount-text {
-    font-size: 0.7rem;
-    white-space: normal;
-    padding: 0 0.5rem;
-    line-height: 1.2;
-  }
-
-  .top-panel {
-    min-height: 25px;
-    height: 4vh;
-  }
-}
 </style>

@@ -3,5 +3,5 @@ services:
   app:
     build: .
     ports:
-      - "80:80"  # Измените с 8080 на 80
+      - "80:80"
     restart: unless-stopped
