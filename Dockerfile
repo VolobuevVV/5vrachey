@@ -2,6 +2,7 @@ FROM node:20-alpine as frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
+RUN npm install vue-router@4
 COPY frontend/ .
 RUN npm run build
 
