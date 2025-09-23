@@ -21,7 +21,8 @@ COPY --from=backend-build /app/backend /app/backend
 
 COPY backend/.env /app/
 
-RUN chmod +x /app/main
+RUN chmod +x /app/backend/main
+
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
