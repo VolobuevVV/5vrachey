@@ -20,6 +20,7 @@ COPY --from=frontend-build /app/frontend/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=backend-build /app/backend/main /app/main
+COPY backend/.env /app/
 
 RUN chmod +x /app/main
 
