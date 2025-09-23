@@ -19,6 +19,8 @@ COPY --from=frontend-build /app/frontend/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=backend-build /app/backend /app/backend
 
+COPY backend/.env /app/
+
 RUN chmod +x /app/main
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
