@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'hidden': isScrolled }" class="top-panel">
-    <div class="discount-text">Скидка 20% на первое посещение</div>
+    <div class="discount-text">{{ discountText }}</div>
   </div>
 </template>
 
@@ -9,11 +9,13 @@ export default {
   name: 'TopPanel',
   data() {
     return {
-      isScrolled: false
+      isScrolled: false,
+      discountText: 'Загрузка...'
     }
   },
-  mounted() {
+  async mounted() {
     window.addEventListener('scroll', this.handleScroll)
+    await this.fetchDiscountText()
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -21,6 +23,16 @@ export default {
   methods: {
     handleScroll() {
       this.isScrolled = window.scrollY > 50
+    },
+    async fetchDiscountText() {
+      try {
+        const response = await fetch('/api/top-panel-text')
+        const data = await response.json()
+        this.discountText = data.text
+      } catch (error) {
+        console.error('Ошибка загрузки текста:', error)
+        this.discountText = 'Скидка 20% на первое посещение'
+      }
     }
   }
 }
@@ -55,5 +67,4 @@ export default {
   transform: translateY(-100%);
   pointer-events: none;
 }
-
 </style>

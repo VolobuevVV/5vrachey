@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS promotions (
+    id SERIAL PRIMARY KEY,
+    text TEXT NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

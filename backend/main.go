@@ -1,30 +1,87 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
-	"net/http"
+	"my-app/handlers"
+	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
-// Обработчик для главной страницы
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	// Разрешаем запросы с любого origin (CORS)
-	// В продакшене нужно указать конкретный origin вашего фронтенда!
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+var DB *sql.DB
 
-	// Отвечаем JSON-данными
-	w.Header().Set("Content-Type", "application/json")
+func InitDB() {
+	connStr := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
+		os.Getenv("DB_SSLMODE"),
+	)
 
-	// Простое сообщение, которое мы будем отправлять на фронтенд
-	response := `{"message": "Hello from Go backend!"}`
-	fmt.Fprint(w, response)
+	var err error
+	DB, err = sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal("Error connecting to database:", err)
+	}
+
+	err = DB.Ping()
+	if err != nil {
+		log.Fatal("Error pinging database:", err)
+	}
+
+	log.Println("Connected to database successfully!")
+}
+
+func runMigrations() {
+	driver, err := postgres.WithInstance(DB, &postgres.Config{})
+	if err != nil {
+		log.Fatal("Error creating migration driver:", err)
+	}
+
+	m, err := migrate.NewWithDatabaseInstance(
+		"file://migrations",
+		"postgres", driver)
+	if err != nil {
+		log.Fatal("Error creating migration instance:", err)
+	}
+
+	err = m.Up()
+	if err != nil && err != migrate.ErrNoChange {
+		log.Fatal("Error applying migrations:", err)
+	}
+
+	log.Println("Migrations applied successfully!")
 }
 
 func main() {
-	// Регистрируем наш обработчик для пути "/api"
-	http.HandleFunc("/api", homeHandler)
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
-	// Запускаем сервер на порту 8080
-	fmt.Println("Backend server started on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	InitDB()
+	runMigrations()
+
+	router := gin.Default()
+
+	promotionHandler := &handlers.PromotionHandler{DB: DB}
+	router.GET("/api/top-panel-text", promotionHandler.GetPromotionText)
+
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Printf("Server starting on port %s", port)
+	log.Fatal(router.Run(":" + port))
 }
