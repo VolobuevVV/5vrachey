@@ -1,7 +1,9 @@
 package database
 
 import (
+	"errors"
 	"log"
+	"os"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
@@ -14,15 +16,20 @@ func RunMigrations() {
 		log.Fatal("Error creating migration driver:", err)
 	}
 
+	migrationsPath := "file://database/migrations"
+	if _, err := os.Stat("/app/backend/database/migrations"); err == nil {
+		migrationsPath = "file:///app/backend/database/migrations"
+	}
+
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://database/migrations",
+		migrationsPath,
 		"postgres", driver)
 	if err != nil {
 		log.Fatal("Error creating migration instance:", err)
 	}
 
 	err = m.Up()
-	if err != nil && err != migrate.ErrNoChange {
+	if err != nil && !errors.Is(err, migrate.ErrNoChange) {
 		log.Fatal("Error applying migrations:", err)
 	}
 
