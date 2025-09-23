@@ -1,6 +1,6 @@
 #!/bin/sh
 
 cd /app
-./main &
+./backend/main &
 sleep 3
 nginx -g 'daemon off;'
