@@ -41,6 +41,3 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
-
-# Go files
-backend/go.sum
