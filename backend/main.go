@@ -43,10 +43,9 @@ func InitDB() {
 }
 
 func runMigrations() {
-	files, _ := os.ReadDir("/app/backend/migrations")
-	log.Printf("Files in /app/backend/migrations:")
-	for _, file := range files {
-		log.Printf(" - %s", file.Name())
+	driver, err := postgres.WithInstance(DB, &postgres.Config{})
+	if err != nil {
+		log.Fatal("Error creating migration driver:", err)
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
@@ -65,8 +64,8 @@ func runMigrations() {
 }
 
 func main() {
-	files, _ := os.ReadDir("/app/backend")
-	log.Printf("Files in /app/backend:")
+	files, _ := os.ReadDir("/app/backend/migrations")
+	log.Printf("Files in /app/backend/migrations:")
 	for _, file := range files {
 		log.Printf(" - %s", file.Name())
 	}
