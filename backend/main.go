@@ -64,9 +64,9 @@ func runMigrations() {
 }
 
 func main() {
-	err := godotenv.Load()
+	err := godotenv.Load("/app/.env")
 	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+		log.Fatal("Error loading .env file from /app/.env:", err)
 	}
 
 	InitDB()
