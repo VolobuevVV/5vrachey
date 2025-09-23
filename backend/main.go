@@ -64,9 +64,17 @@ func runMigrations() {
 }
 
 func main() {
-	err := godotenv.Load("/app/.env")
+	dir, _ := os.Getwd()
+	log.Printf("Current directory: %s", dir)
+
+	files, _ := os.ReadDir(".")
+	log.Printf("Files in current directory:")
+	for _, file := range files {
+		log.Printf(" - %s", file.Name())
+	}
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file from /app/.env:", err)
+		log.Fatalf("Error loading .env file: %v", err)
 	}
 
 	InitDB()
