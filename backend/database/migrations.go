@@ -15,7 +15,7 @@ func RunMigrations() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://migrations",
+		"file://database/migrations",
 		"postgres", driver)
 	if err != nil {
 		log.Fatal("Error creating migration instance:", err)
