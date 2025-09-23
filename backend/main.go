@@ -48,8 +48,13 @@ func runMigrations() {
 		log.Fatal("Error creating migration driver:", err)
 	}
 
+	migrationsPath := "file://migrations"
+	if _, err := os.Stat("/app/backend/migrations"); err == nil {
+		migrationsPath = "file:///app/backend/migrations" // в контейнере
+	}
+
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://migrations",
+		migrationsPath,
 		"postgres", driver)
 	if err != nil {
 		log.Fatal("Error creating migration instance:", err)
