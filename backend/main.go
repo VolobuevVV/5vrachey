@@ -64,11 +64,8 @@ func runMigrations() {
 }
 
 func main() {
-	dir, _ := os.Getwd()
-	log.Printf("Current directory: %s", dir)
-
-	files, _ := os.ReadDir(".")
-	log.Printf("Files in current directory:")
+	files, _ := os.ReadDir("/app/backend")
+	log.Printf("Files in /app/backend:")
 	for _, file := range files {
 		log.Printf(" - %s", file.Name())
 	}
