@@ -2,15 +2,31 @@
   <div>
     <div class="doctor-card">
       <div class="doctor-image">
-        <img :src="doctor.photo" :alt="doctor.name" class="doctor-photo">
+        <img :src="doctorPhoto" :alt="fullName" class="doctor-photo">
       </div>
       <div class="doctor-info">
-        <h3 class="doctor-name">{{ doctor.name }}</h3>
-        <p class="doctor-position">{{ doctor.position }}</p>
-        <p class="doctor-experience">Опыт работы: {{ doctor.experience }}</p>
-        <button class="appointment-btn" @click="showIframe = true">
+        <h3 class="doctor-name">{{ fullName }}</h3>
+        <p class="doctor-position">{{ formattedPositions }}</p>
+        <p class="doctor-experience">Опыт работы: {{ doctor.experience }} лет</p>
+
+        <!-- Если запись активна - кнопка записи -->
+        <button
+          class="appointment-btn"
+          @click="openAppointment"
+          v-if="doctor.available_for_appointment"
+        >
           Записаться онлайн
         </button>
+
+        <!-- Если запись неактивна - виджет с телефоном -->
+        <div v-else class="phone-widget">
+          <div class="phone-icon">📞</div>
+          <div class="phone-info">
+            <div class="phone-text">Для записи позвоните:</div>
+            <div class="phone-number">+7 (862) 555-14-06</div>
+            <div class="phone-number">+7 (902) 403-55-00</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -18,14 +34,14 @@
     <div v-if="showIframe" class="iframe-modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h3>Запись к {{ doctor.name }}</h3>
+          <h3>Запись к {{ fullName }}</h3>
           <button class="close-btn" @click="showIframe = false">×</button>
         </div>
         <iframe
-            :src="doctor.appointmentLink"
-            class="appointment-iframe"
-            frameborder="0"
-            allowfullscreen
+          :src="appointmentLink"
+          class="appointment-iframe"
+          frameborder="0"
+          allowfullscreen
         ></iframe>
       </div>
     </div>
@@ -46,15 +62,71 @@ export default {
       showIframe: false
     }
   },
+  computed: {
+    fullName() {
+      return `${this.doctor.last_name} ${this.doctor.first_name} ${this.doctor.patronymic}`
+    },
+    formattedPositions() {
+      return this.doctor.positions.join(', ')
+    },
+    doctorPhoto() {
+      // Заглушка - нужно будет добавить поле photo_url в БД
+      return '/src/assets/images/doctor-placeholder.jpg'
+    },
+    appointmentLink() {
+      // Извлекаем ID до '-' (например из "629306-vasileva" берем "629306")
+      const doctorId = this.doctor.id.split('-')[0]
+      return `https://booking.medflex.ru?user=e6b1637666264d8202e6253e62b38aeb&employeeId=${doctorId}&source=4`
+    }
+  },
   methods: {
     openAppointment() {
-      this.showIframe = true;
+      this.showIframe = true
     }
   }
 }
 </script>
 
 <style scoped>
+/* Стили для виджета телефона */
+.phone-widget {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.phone-icon {
+  font-size: 1.5rem;
+}
+
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.phone-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.phone-number {
+  font-size: 1rem;
+  color: #003449;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.phone-number:hover {
+  text-decoration: underline;
+}
+
+/* Остальные стили без изменений */
 .doctor-card {
   background: white;
   border-radius: 15px;

@@ -21,30 +21,30 @@
 
 <script>
 import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
 
 export default {
   name: 'DepartmentsGrid',
   setup() {
     const router = useRouter()
-
-    const departments = [
-      { id: 'gynecology', name: 'Гинекология', color: '#fce4ec' },
-      { id: 'urology', name: 'Урология', color: '#e3f2fd' },
-      { id: 'neurology', name: 'Неврология', color: '#fff3e0' },
-      { id: 'cardiology', name: 'Кардиология', color: '#ffebee' },
-      { id: 'gastroenterology', name: 'Гастроэнтерология', color: '#f3e5f5' },
-      { id: 'dermatology', name: 'Дерматология', color: '#e8f5e9' },
-      { id: 'pediatrics', name: 'Педиатрия', color: '#fff8e1' },
-      { id: 'therapy', name: 'Терапия', color: '#e0f7fa' },
-      { id: 'diagnostics', name: 'Диагностика', color: '#f5f5f5' },
-      { id: 'rehabilitation', name: 'Реабилитация', color: '#e8eaf6' },
-      { id: 'endocrinology', name: 'Эндокринология', color: '#f1f8e9' },
-      { id: 'psychotherapy', name: 'Психотерапия', color: '#f3e5f5' }
-    ]
+    const departments = ref([])
 
     const goToDepartment = (departmentId) => {
       router.push(`/department/${departmentId}`)
     }
+
+    const loadDepartments = async () => {
+      try {
+        const response = await fetch('/api/departments')
+        departments.value = await response.json()
+      } catch (error) {
+        console.error('Ошибка загрузки отделений:', error)
+      }
+    }
+
+    onMounted(() => {
+      loadDepartments()
+    })
 
     return {
       departments,

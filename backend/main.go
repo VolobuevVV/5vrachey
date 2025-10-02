@@ -24,6 +24,13 @@ func main() {
 	promotionHandler := &handlers.PromotionHandler{DB: database.DB}
 	router.GET("/api/top-panel-text", promotionHandler.GetPromotionText)
 
+	departmentHandler := &handlers.DepartmentHandler{DB: database.DB}
+	router.GET("/api/departments", departmentHandler.GetDepartments)
+
+	doctorHandler := &handlers.DoctorHandler{DB: database.DB}
+	router.GET("/api/doctors", doctorHandler.GetDoctors)
+	router.GET("/api/doctors/department/:id", doctorHandler.GetDoctorsByDepartment)
+
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {
 		port = "8080"

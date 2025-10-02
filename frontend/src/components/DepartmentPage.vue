@@ -17,7 +17,6 @@
 
 <script>
 import DoctorCard from '@/components/DoctorCard.vue'
-import doctorsData from '@/data/doctors.json'
 
 export default {
   name: 'DepartmentPage',
@@ -26,25 +25,38 @@ export default {
   },
   data() {
     return {
-      doctors: []
+      doctors: [],
+      departmentName: ''
     }
   },
   computed: {
     departmentId() {
       return this.$route.params.id
-    },
-    departmentName() {
-      const department = doctorsData.departments.find(dept => dept.id === this.departmentId)
-      return department ? department.name : 'Отделение'
     }
   },
-  mounted() {
-    this.loadDoctors()
+  async mounted() {
+    await this.loadDoctors()
+    await this.loadDepartmentName()
   },
   methods: {
-    loadDoctors() {
-      const department = doctorsData.departments.find(dept => dept.id === this.departmentId)
-      this.doctors = department ? department.doctors : []
+    async loadDoctors() {
+      try {
+        const response = await fetch(`/api/doctors/department/${this.departmentId}`)
+        this.doctors = await response.json()
+      } catch (error) {
+        console.error('Ошибка загрузки врачей:', error)
+      }
+    },
+    async loadDepartmentName() {
+      try {
+        const response = await fetch('/api/departments')
+        const departments = await response.json()
+        const department = departments.find(dept => dept.id === this.departmentId)
+        this.departmentName = department ? department.name : 'Отделение'
+      } catch (error) {
+        console.error('Ошибка загрузки названия отделения:', error)
+        this.departmentName = 'Отделение'
+      }
     }
   }
 }

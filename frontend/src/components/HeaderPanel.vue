@@ -4,7 +4,7 @@
       <div class="header-content">
         <div class="logo-section">
           <img
-            src="@/assets/images/logo.png"
+            src="@/assets/svg/logo.svg"
             alt="Медицинский центр 5 ВРАЧЕЙ"
             class="logo-image"
           >

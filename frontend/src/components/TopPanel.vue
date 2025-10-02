@@ -56,7 +56,7 @@ export default {
 
 .discount-text {
   color: white;
-  font-size: 0.8rem;
+  font-size: max(1.8vh, 12px);
   font-weight: 680;
   text-align: center;
   white-space: nowrap;
