@@ -73,7 +73,6 @@ export default {
       return `/files/${this.doctor.id}.webp`
     },
     appointmentLink() {
-      // Извлекаем ID до '-' (например из "629306-vasileva" берем "629306")
       const doctorId = this.doctor.id.split('-')[0]
       return `https://booking.medflex.ru?user=e6b1637666264d8202e6253e62b38aeb&employeeId=${doctorId}&source=4`
     }
