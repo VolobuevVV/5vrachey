@@ -9,7 +9,6 @@
         <p class="doctor-position">{{ formattedPositions }}</p>
         <p class="doctor-experience">Опыт работы: {{ doctor.experience }} лет</p>
 
-        <!-- Если запись активна - кнопка записи -->
         <button
           class="appointment-btn"
           @click="openAppointment"
@@ -17,20 +16,9 @@
         >
           Записаться онлайн
         </button>
-
-        <!-- Если запись неактивна - виджет с телефоном -->
-        <div v-else class="phone-widget">
-          <div class="phone-icon">📞</div>
-          <div class="phone-info">
-            <div class="phone-text">Для записи позвоните:</div>
-            <div class="phone-number">+7 (862) 555-14-06</div>
-            <div class="phone-number">+7 (902) 403-55-00</div>
-          </div>
-        </div>
       </div>
     </div>
 
-    <!-- Модальное окно с iframe -->
     <div v-if="showIframe" class="iframe-modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -86,53 +74,18 @@ export default {
 </script>
 
 <style scoped>
-/* Стили для виджета телефона */
-.phone-widget {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 10px;
-  border: 1px solid #e9ecef;
-}
-
-.phone-icon {
-  font-size: 1.5rem;
-}
-
-.phone-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.phone-text {
-  font-size: 0.9rem;
-  color: #6c757d;
-  font-weight: 500;
-}
-
-.phone-number {
-  font-size: 1rem;
-  color: #003449;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.phone-number:hover {
-  text-decoration: underline;
-}
-
-/* Остальные стили без изменений */
 .doctor-card {
   background: white;
   border-radius: 15px;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   transition: transform 0.3s ease;
+  text-align: center;
+  height: 100%;
 }
 
 .doctor-card:hover {
@@ -140,46 +93,63 @@ export default {
 }
 
 .doctor-image {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   flex-shrink: 0;
 }
 
 .doctor-photo {
-  width: 120px;
-  height: 120px;
+  width: 33.33%;
+  max-width: 120px;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #f0f0f0;
 }
 
 .doctor-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+  flex: 1;
+  justify-content: space-between;
 }
 
 .doctor-name {
   color: #003449;
   font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  max-width: calc(100% - 60px);
+  word-wrap: break-word;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
 }
 
 .doctor-position {
   color: #2c3e50;
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  max-width: calc(100% - 60px);
+  word-wrap: break-word;
+  line-height: 1.3;
+  margin-bottom: 0.1rem;
 }
 
 .doctor-experience {
   color: #666;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
 }
 
 .appointment-btn {
-  padding: 0.8rem 1.5rem;
+  padding: 0.7rem 0;
   background: rgb(6, 113, 133);
   color: white;
   border: none;
@@ -187,14 +157,15 @@ export default {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
-  align-self: flex-start;
+  width: 210px;
+  font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 .appointment-btn:hover {
   background: rgba(6, 113, 133, 0.9);
 }
 
-/* Стили для модального окна с iframe */
 .iframe-modal {
   position: fixed;
   top: 0;

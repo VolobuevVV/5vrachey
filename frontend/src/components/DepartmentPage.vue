@@ -64,13 +64,17 @@ export default {
 
 <style scoped>
 .department-page {
-  padding-top: 30vh;
-  max-width: 1200px;
+  padding-top: 21vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-header {
   text-align: center;
-  padding-top: 21vh;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .department-name {
@@ -87,9 +91,11 @@ export default {
 
 .doctors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: 2rem;
   margin-top: 5vh;
+  width: 100%;
+  max-width: 1400px;
+  justify-content: center;
 }
-
 </style>
