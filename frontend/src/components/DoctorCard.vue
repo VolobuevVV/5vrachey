@@ -100,8 +100,7 @@ export default {
 }
 
 .doctor-photo {
-  width: 33.33%;
-  max-width: 120px;
+  width: 120px;
   height: auto;
   aspect-ratio: 1;
   border-radius: 50%;
