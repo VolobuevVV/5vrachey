@@ -70,8 +70,7 @@ export default {
       return this.doctor.positions.join(', ')
     },
     doctorPhoto() {
-      // Заглушка - нужно будет добавить поле photo_url в БД
-      return '/src/assets/images/doctor-placeholder.jpg'
+      return `/files/${this.doctor.id}.webp`
     },
     appointmentLink() {
       // Извлекаем ID до '-' (например из "629306-vasileva" берем "629306")
