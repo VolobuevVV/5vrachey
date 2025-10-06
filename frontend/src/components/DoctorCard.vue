@@ -2,7 +2,12 @@
   <div>
     <div class="doctor-card">
       <div class="doctor-image">
-        <img :src="doctorPhoto" :alt="fullName" class="doctor-photo">
+        <img
+          :src="doctorPhoto"
+          :alt="fullName"
+          class="doctor-photo"
+          @error="handleImageError"
+        >
       </div>
       <div class="doctor-info">
         <h3 class="doctor-name">{{ fullName }}</h3>
@@ -47,7 +52,8 @@ export default {
   },
   data() {
     return {
-      showIframe: false
+      showIframe: false,
+      imageError: false
     }
   },
   computed: {
@@ -58,6 +64,9 @@ export default {
       return this.doctor.positions.join(', ')
     },
     doctorPhoto() {
+      if (this.imageError) {
+        return '/src/assets/svg/default_user.svg'
+      }
       return `/files/${this.doctor.id}.webp`
     },
     appointmentLink() {
@@ -68,6 +77,9 @@ export default {
   methods: {
     openAppointment() {
       this.showIframe = true
+    },
+    handleImageError() {
+      this.imageError = true
     }
   }
 }
@@ -134,7 +146,7 @@ export default {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 30px);
   word-wrap: break-word;
   line-height: 1.3;
   margin-bottom: 0.1rem;

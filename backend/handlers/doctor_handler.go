@@ -24,7 +24,32 @@ type DoctorHandler struct {
 	DB *sql.DB
 }
 
+func (h *DoctorHandler) LoadPositionValues() (map[string]string, error) {
+	rows, err := h.DB.Query("SELECT id, name FROM positions")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	positions := make(map[string]string)
+	for rows.Next() {
+		var id, name string
+		err := rows.Scan(&id, &name)
+		if err != nil {
+			return nil, err
+		}
+		positions[id] = name
+	}
+	return positions, nil
+}
+
 func (h *DoctorHandler) GetDoctors(c *gin.Context) {
+	positions, err := h.LoadPositionValues()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+		return
+	}
+
 	rows, err := h.DB.Query("SELECT id, last_name, first_name, patronymic, positions, experience, departments, is_active, available_for_appointment FROM doctors WHERE is_active = true ORDER BY last_name, first_name")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
@@ -35,12 +60,13 @@ func (h *DoctorHandler) GetDoctors(c *gin.Context) {
 	var doctors []Doctor
 	for rows.Next() {
 		var doctor Doctor
+		var positionKeys []string
 		err := rows.Scan(
 			&doctor.ID,
 			&doctor.LastName,
 			&doctor.FirstName,
 			&doctor.Patronymic,
-			pq.Array(&doctor.Positions),
+			pq.Array(&positionKeys),
 			&doctor.Experience,
 			pq.Array(&doctor.Departments),
 			&doctor.IsActive,
@@ -50,6 +76,13 @@ func (h *DoctorHandler) GetDoctors(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning doctors"})
 			return
 		}
+
+		for _, key := range positionKeys {
+			if name, exists := positions[key]; exists {
+				doctor.Positions = append(doctor.Positions, name)
+			}
+		}
+
 		doctors = append(doctors, doctor)
 	}
 
@@ -58,6 +91,12 @@ func (h *DoctorHandler) GetDoctors(c *gin.Context) {
 
 func (h *DoctorHandler) GetDoctorsByDepartment(c *gin.Context) {
 	departmentID := c.Param("id")
+
+	positions, err := h.LoadPositionValues()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+		return
+	}
 
 	rows, err := h.DB.Query("SELECT id, last_name, first_name, patronymic, positions, experience, departments, is_active, available_for_appointment FROM doctors WHERE is_active = true AND $1 = ANY(departments) ORDER BY last_name, first_name", departmentID)
 	if err != nil {
@@ -69,12 +108,13 @@ func (h *DoctorHandler) GetDoctorsByDepartment(c *gin.Context) {
 	var doctors []Doctor
 	for rows.Next() {
 		var doctor Doctor
+		var positionKeys []string
 		err := rows.Scan(
 			&doctor.ID,
 			&doctor.LastName,
 			&doctor.FirstName,
 			&doctor.Patronymic,
-			pq.Array(&doctor.Positions),
+			pq.Array(&positionKeys),
 			&doctor.Experience,
 			pq.Array(&doctor.Departments),
 			&doctor.IsActive,
@@ -84,6 +124,13 @@ func (h *DoctorHandler) GetDoctorsByDepartment(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning doctors"})
 			return
 		}
+
+		for _, key := range positionKeys {
+			if name, exists := positions[key]; exists {
+				doctor.Positions = append(doctor.Positions, name)
+			}
+		}
+
 		doctors = append(doctors, doctor)
 	}
 
