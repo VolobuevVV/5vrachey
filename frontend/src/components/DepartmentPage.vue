@@ -2,7 +2,6 @@
   <div class="department-page">
     <div class="page-header">
       <h1 class="department-name">{{ departmentName }}</h1>
-      <p class="department-description">Квалифицированные специалисты с многолетним опытом работы</p>
     </div>
 
     <div class="doctors-grid">
@@ -52,7 +51,7 @@ export default {
         const response = await fetch('/api/departments')
         const departments = await response.json()
         const department = departments.find(dept => dept.id === this.departmentId)
-        this.departmentName = department ? department.name : 'Отделение'
+        this.departmentName = department ? department.full_name : 'Отделение'
       } catch (error) {
         console.error('Ошибка загрузки названия отделения:', error)
         this.departmentName = 'Отделение'
@@ -82,12 +81,8 @@ export default {
 .department-name {
   color: #003449;
   font-size: 2.5rem;
-  font-weight: 800;
-}
-
-.department-description {
-  color: #2c3e50;
-  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
 .doctors-grid {

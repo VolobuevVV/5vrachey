@@ -1,18 +1,21 @@
 <template>
   <div>
     <div class="doctor-card">
-      <div class="doctor-image">
-        <img
-          :src="doctorPhoto"
-          :alt="fullName"
-          class="doctor-photo"
-          @error="handleImageError"
-        >
+      <div class="card-header">
+        <div class="doctor-image">
+          <img
+            :src="doctorPhoto"
+            :alt="fullName"
+            class="doctor-photo"
+            @error="handleImageError"
+          >
+        </div>
+        <span v-if="doctor.is_head_doctor" class="head-badge">Заведующий</span>
       </div>
       <div class="doctor-info">
         <h3 class="doctor-name">{{ fullName }}</h3>
         <p class="doctor-position">{{ formattedPositions }}</p>
-        <p class="doctor-experience">Опыт работы: {{ doctor.experience }} лет</p>
+        <p class="doctor-experience">Опыт работы: {{ experienceText }}</p>
 
         <button
           class="appointment-btn"
@@ -21,6 +24,9 @@
         >
           Записаться онлайн
         </button>
+        <div v-else class="unavailable-text">
+          Запись временно недоступна
+        </div>
       </div>
     </div>
 
@@ -63,6 +69,16 @@ export default {
     formattedPositions() {
       return this.doctor.positions.join(', ')
     },
+    experienceText() {
+      const years = this.doctor.experience
+      if (years % 10 === 1 && years % 100 !== 11) {
+        return `${years} год`
+      } else if ([2, 3, 4].includes(years % 10) && ![12, 13, 14].includes(years % 100)) {
+        return `${years} года`
+      } else {
+        return `${years} лет`
+      }
+    },
     doctorPhoto() {
       if (this.imageError) {
         return '/src/assets/svg/default_user.svg'
@@ -98,10 +114,18 @@ export default {
   transition: transform 0.3s ease;
   text-align: center;
   height: 100%;
+  position: relative;
 }
 
 .doctor-card:hover {
   transform: translateY(-5px);
+}
+
+.card-header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .doctor-image {
@@ -118,6 +142,19 @@ export default {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #f0f0f0;
+}
+
+.head-badge {
+  background: #ff6b35;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  z-index: 2;
 }
 
 .doctor-info {
@@ -175,6 +212,14 @@ export default {
 
 .appointment-btn:hover {
   background: rgba(6, 113, 133, 0.9);
+}
+
+.unavailable-text {
+  color: #dc3545;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.7rem 0;
+  width: 210px;
 }
 
 .iframe-modal {

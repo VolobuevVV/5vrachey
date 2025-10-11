@@ -18,6 +18,7 @@ type Doctor struct {
 	Departments             []string `json:"departments"`
 	IsActive                bool     `json:"is_active"`
 	AvailableForAppointment bool     `json:"available_for_appointment"`
+	IsHeadDoctor            bool     `json:"is_head_doctor"`
 }
 
 type DoctorHandler struct {
@@ -77,6 +78,7 @@ func (h *DoctorHandler) GetDoctors(c *gin.Context) {
 			return
 		}
 
+		doctor.Positions = make([]string, 0, len(positionKeys))
 		for _, key := range positionKeys {
 			if name, exists := positions[key]; exists {
 				doctor.Positions = append(doctor.Positions, name)
@@ -92,13 +94,26 @@ func (h *DoctorHandler) GetDoctors(c *gin.Context) {
 func (h *DoctorHandler) GetDoctorsByDepartment(c *gin.Context) {
 	departmentID := c.Param("id")
 
+	var headDoctorID string
+	h.DB.QueryRow("SELECT head_doctor_id FROM departments WHERE id = $1", departmentID).Scan(&headDoctorID)
+
 	positions, err := h.LoadPositionValues()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
 	}
 
-	rows, err := h.DB.Query("SELECT id, last_name, first_name, patronymic, positions, experience, departments, is_active, available_for_appointment FROM doctors WHERE is_active = true AND $1 = ANY(departments) ORDER BY last_name, first_name", departmentID)
+	rows, err := h.DB.Query(`
+		SELECT id, last_name, first_name, patronymic, positions, experience, departments, is_active, available_for_appointment 
+		FROM doctors 
+		WHERE is_active = true AND $1 = ANY(departments) 
+		ORDER BY 
+			CASE WHEN id = $2 THEN 0 ELSE 1 END,
+			CASE WHEN available_for_appointment = true THEN 0 ELSE 1 END,
+			position,
+			last_name, 
+			first_name
+	`, departmentID, headDoctorID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
@@ -125,11 +140,14 @@ func (h *DoctorHandler) GetDoctorsByDepartment(c *gin.Context) {
 			return
 		}
 
+		doctor.Positions = make([]string, 0, len(positionKeys))
 		for _, key := range positionKeys {
 			if name, exists := positions[key]; exists {
 				doctor.Positions = append(doctor.Positions, name)
 			}
 		}
+
+		doctor.IsHeadDoctor = doctor.ID == headDoctorID
 
 		doctors = append(doctors, doctor)
 	}

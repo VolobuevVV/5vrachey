@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS doctors (
     departments TEXT[] NOT NULL,
     is_active BOOLEAN DEFAULT true,
     available_for_appointment BOOLEAN DEFAULT true,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    position INTEGER
 );

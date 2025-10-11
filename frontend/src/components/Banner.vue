@@ -30,7 +30,7 @@ export default {
   width: 90%;
   margin-left: 10%;
   height: 100%;
-  background-image: url('@/assets/images/banner3.jpg');
+  background-image: url('@/assets/images/banner2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
