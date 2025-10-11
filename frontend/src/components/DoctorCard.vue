@@ -83,7 +83,7 @@ export default {
       if (this.imageError) {
         return '/src/assets/svg/default_user.svg'
       }
-      return `/files/${this.doctor.id}.webp`
+      return `/files/doctors/${this.doctor.id}.webp`
     },
     appointmentLink() {
       const doctorId = this.doctor.id.split('-')[0]

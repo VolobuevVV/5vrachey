@@ -17,6 +17,11 @@
 <script>
 export default {
   name: 'Banner',
+  data() {
+    return {
+      bannerImage: '/files/banners/banner1.webp'
+    }
+  },
   methods: {
     openAppointment() {
       window.open('https://prodoctorov.ru/adler/lpu/47924-pyat-vrachey/', '_blank');
@@ -30,7 +35,7 @@ export default {
   width: 90%;
   margin-left: 10%;
   height: 100%;
-  background-image: url('@/assets/images/banner2.jpg');
+  background-image: v-bind('`url(${bannerImage})`');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -67,9 +72,9 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60%; /* уменьшил высоту */
+  height: 60%;
   background: radial-gradient(
-    ellipse 70% 60% at center 60%, /* сплюснул и сместил вниз */
+    ellipse 70% 60% at center 60%,
     rgba(255, 255, 255, 0.8) 0%,
     rgba(255, 255, 255, 0.8) 20%,
     rgba(255, 255, 255, 0.8) 40%,
