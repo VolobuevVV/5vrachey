@@ -8,10 +8,13 @@ import (
 )
 
 type Department struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Color    string `json:"color"`
-	IsActive bool   `json:"is_active"`
+	ID           string `json:"id"`
+	Name         string `json:"name"`
+	FullName     string `json:"full_name"`
+	Color        string `json:"color"`
+	IsActive     bool   `json:"is_active"`
+	Position     int32  `json:"position"`
+	HeadDoctorID string `json:"head_doctor_id"`
 }
 
 type DepartmentHandler struct {
@@ -19,7 +22,7 @@ type DepartmentHandler struct {
 }
 
 func (h *DepartmentHandler) GetDepartments(c *gin.Context) {
-	rows, err := h.DB.Query("SELECT id, name, color, is_active FROM departments WHERE is_active = true ORDER BY id")
+	rows, err := h.DB.Query("SELECT id, name, full_name, color, is_active, position, head_doctor_id FROM departments WHERE is_active = true ORDER BY position")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
@@ -29,7 +32,7 @@ func (h *DepartmentHandler) GetDepartments(c *gin.Context) {
 	var departments []Department
 	for rows.Next() {
 		var dept Department
-		err := rows.Scan(&dept.ID, &dept.Name, &dept.Color, &dept.IsActive)
+		err := rows.Scan(&dept.ID, &dept.Name, &dept.FullName, &dept.Color, &dept.IsActive)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning departments"})
 			return

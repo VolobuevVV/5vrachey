@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS departments (
-    id VARCHAR(50) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    color VARCHAR(7) NOT NULL,
-    is_active BOOLEAN DEFAULT true,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+id VARCHAR(50) PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+full_name VARCHAR(100) NOT NULL,
+color VARCHAR(7) NOT NULL,
+is_active BOOLEAN DEFAULT true,
+position INTEGER,
+head_doctor_id VARCHAR(50)
 );
