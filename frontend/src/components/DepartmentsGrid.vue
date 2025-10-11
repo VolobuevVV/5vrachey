@@ -14,7 +14,7 @@
     </div>
     <div class="hero-widget">
       <img src="@/components/icons/medal.svg" class="medal-icon" alt="Медаль">
-      <span class="widget-text">Входим в топ 5 частных клиник Адлера на ПроДокторов</span>
+      <span class="widget-text">Входим в топ 3 частных клиник Адлера на ПроДокторов</span>
     </div>
   </div>
 </template>
@@ -63,7 +63,7 @@ export default {
 
 
 .departments-grid {
-  width: 100%;
+  width: 90%;
   height: 100%;
 }
 

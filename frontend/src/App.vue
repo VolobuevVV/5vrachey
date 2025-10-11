@@ -17,12 +17,12 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
+  background-color: rgb(255, 255, 255);
 }
 
 #app {
   min-height: 100vh;
   min-width: 100vw;
-  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   padding-left: env(safe-area-inset-left);

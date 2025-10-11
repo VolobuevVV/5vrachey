@@ -27,9 +27,9 @@ export default {
 
 <style scoped>
 .main-page {
-  padding-top: 21vh;
-  width: 100vw;
-  min-height: 100vh;
+  padding-top: 160px;
+  width: 100%;
+  height: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
@@ -38,30 +38,15 @@ export default {
 
 .content-grid {
   display: grid;
-  grid-template-columns: 35% 65%;
-  gap: 2rem;
-  width: 90vw;
-  max-width: 1400px;
-  margin: 2vh 0 0;
-  padding: 0;
-  height: 400px;
+  grid-template-columns: 40% 60%;
+  width: 100%;
+  height: 100%;
 }
 
 .grid-cell {
   display: flex;
-  align-items: center;
-  height: 400px;
-}
-
-.left-cell {
-  padding: 0;
-  text-align: left;
-  justify-self: start;
-}
-
-.right-cell {
-  flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  align-items: center;
 }
+
 </style>

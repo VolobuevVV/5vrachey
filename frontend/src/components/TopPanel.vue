@@ -44,8 +44,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4vh;
-  min-height: 20px;
+  height: 30px;
   background-color: rgb(6, 113, 133);
   z-index: 1001;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -56,7 +55,7 @@ export default {
 
 .discount-text {
   color: white;
-  font-size: max(1.8vh, 12px);
+  font-size: 14px;
   font-weight: 680;
   text-align: center;
   white-space: nowrap;

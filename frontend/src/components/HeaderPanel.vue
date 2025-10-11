@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'scrolled': isScrolled, 'menu-open': isMenuOpen }" class="header-panel">
+  <header :class="{ 'scrolled': isScrolled }" class="header-panel">
     <div class="header-container">
       <div class="header-content">
         <div class="logo-section">
@@ -9,12 +9,6 @@
             class="logo-image"
           >
         </div>
-
-        <button class="burger-menu" @click="toggleMenu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
 
         <div class="right-section">
           <div class="top-row">
@@ -31,12 +25,12 @@
           </div>
 
           <nav class="navigation-section">
-            <a href="#about" @click="closeMenu">О центре</a>
-            <a href="#doctors" @click="closeMenu">Врачи</a>
-            <a href="#departments" @click="closeMenu">Отделения</a>
-            <a href="#prices" @click="closeMenu">Цены</a>
-            <a href="#patients" @click="closeMenu">Пациентам</a>
-            <a href="#contacts" @click="closeMenu">Контакты</a>
+            <a href="#about">О центре</a>
+            <a href="#doctors">Врачи</a>
+            <a href="#departments">Отделения</a>
+            <a href="#prices">Цены</a>
+            <a href="#patients">Пациентам</a>
+            <a href="#contacts">Контакты</a>
           </nav>
         </div>
       </div>
@@ -49,33 +43,18 @@ export default {
   name: 'HeaderPanel',
   data() {
     return {
-      isScrolled: false,
-      isMenuOpen: false
+      isScrolled: false
     }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
-    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     handleScroll() {
       this.isScrolled = window.scrollY > 50
-    },
-    handleResize() {
-      if (window.innerWidth > 768) {
-        this.isMenuOpen = false
-      }
-    },
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen
-    },
-    closeMenu() {
-      this.isMenuOpen = false
     },
     openAppointment() {
       window.open('https://prodoctorov.ru/adler/lpu/47924-pyat-vrachey/', '_blank');
@@ -90,17 +69,17 @@ export default {
 <style scoped>
 .header-panel {
   position: fixed;
-  top: 4vh;
+  top: 30px;
   left: 0;
   width: 100%;
-  height: 17vh;
-  min-height: 100px;
+  height: 110px;
   background-color: white;
   transition: all 0.3s ease;
   z-index: 1000;
   padding: 0.8rem 0;
   box-shadow: 0 2px 25px rgba(0, 0, 0, 0.08);
 }
+
 
 .header-panel.scrolled {
   top: 0;
@@ -112,7 +91,10 @@ export default {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .header-content {
@@ -120,37 +102,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-}
-
-.burger-menu {
-  display: none;
-  flex-direction: column;
-  gap: 3px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem;
-  z-index: 1002;
-}
-
-.burger-menu span {
-  width: 22px;
-  height: 3px;
-  background: rgb(6, 113, 133);
-  transition: all 0.3s ease;
-  transform-origin: center;
-}
-
-.header-panel.menu-open .burger-menu span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.header-panel.menu-open .burger-menu span:nth-child(2) {
-  opacity: 0;
-}
-
-.header-panel.menu-open .burger-menu span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .right-section {
@@ -263,104 +214,9 @@ export default {
 }
 
 .logo-image {
-  height: 10vh;
+  height: 70px;
   width: auto;
   object-fit: contain;
-  transition: all 0.3s ease;
 }
 
-.header-panel.scrolled .logo-image {
-  height: 8vh;
-}
-
-@media (max-width: 768px) {
-  .header-panel {
-    top: 3vh;
-    padding: 0.6rem 0;
-    min-height: 60px;
-  }
-
-  .header-panel.scrolled {
-    padding: 0.3rem 0;
-  }
-
-  .header-container {
-    padding: 0 1rem;
-  }
-
-  .burger-menu {
-    display: flex;
-  }
-
-  .right-section {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100vh;
-    background: white;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    transition: left 0.3s ease;
-    z-index: 1001;
-    padding: 1.5rem;
-  }
-
-  .header-panel.menu-open .right-section {
-    left: 0;
-  }
-
-  .top-row {
-    justify-content: center;
-  }
-
-  .phones-buttons {
-    flex-direction: column;
-    gap: 1.2rem;
-    align-items: center;
-  }
-
-  .phone-numbers {
-    align-items: center;
-    text-align: center;
-    gap: 0.3rem;
-  }
-
-  .phone {
-    font-size: 1rem;
-  }
-
-  .buttons-section {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .location-btn, .appointment-btn {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    width: 220px;
-    text-align: center;
-  }
-
-  .navigation-section {
-    flex-direction: column;
-    gap: 1.2rem;
-    text-align: center;
-  }
-
-  .navigation-section a {
-    font-size: 2rem;
-    padding: 0.4rem 0;
-  }
-
-  .logo-image {
-    height: 10vh;
-  }
-
-  .header-panel.scrolled .logo-image {
-    height: 8vh;
-  }
-}
 </style>

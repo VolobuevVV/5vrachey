@@ -64,24 +64,25 @@ export default {
 
 <style scoped>
 .department-page {
-  padding-top: 21vh;
+  padding-top: 160px;
   width: 100%;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .page-header {
   text-align: center;
   width: 100%;
-  max-width: 1200px;
 }
 
 .department-name {
   color: #003449;
   font-size: 2.5rem;
   font-weight: 800;
-  margin-bottom: 1rem;
 }
 
 .department-description {
@@ -93,7 +94,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 2rem;
-  margin-top: 5vh;
   width: 100%;
   max-width: 1400px;
   justify-content: center;
