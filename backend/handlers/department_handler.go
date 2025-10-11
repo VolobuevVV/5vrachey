@@ -32,7 +32,7 @@ func (h *DepartmentHandler) GetDepartments(c *gin.Context) {
 	var departments []Department
 	for rows.Next() {
 		var dept Department
-		err := rows.Scan(&dept.ID, &dept.Name, &dept.FullName, &dept.Color, &dept.IsActive)
+		err := rows.Scan(&dept.ID, &dept.Name, &dept.FullName, &dept.Color, &dept.IsActive, &dept.Position, &dept.HeadDoctorID)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning departments"})
 			return
