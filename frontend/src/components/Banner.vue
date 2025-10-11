@@ -35,7 +35,7 @@ export default {
   width: 90%;
   margin-left: 10%;
   height: 100%;
-  background-image: v-bind('`url(${bannerImage})`');
+  background-image: url('/files/banners/banner1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
