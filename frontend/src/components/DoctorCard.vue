@@ -83,7 +83,11 @@ export default {
       if (this.imageError) {
         return '/src/assets/svg/default_user.svg'
       }
-      return `/files/doctors/${this.doctor.id}.webp`
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return `http://localhost:8081/doctors/${this.doctor.id}.webp`
+      } else {
+        return `/files/doctors/${this.doctor.id}.webp`
+      }
     },
     appointmentLink() {
       const doctorId = this.doctor.id.split('-')[0]

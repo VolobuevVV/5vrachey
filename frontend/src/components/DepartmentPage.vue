@@ -90,7 +90,6 @@ export default {
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 2rem;
   width: 100%;
-  max-width: 1400px;
   justify-content: center;
 }
 </style>

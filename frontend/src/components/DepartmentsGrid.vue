@@ -63,8 +63,9 @@ export default {
 
 
 .departments-grid {
-  width: 90%;
+  width: 100%;
   height: 100%;
+  margin: 40px 40px 20px 20px;
 }
 
 .departments-title {

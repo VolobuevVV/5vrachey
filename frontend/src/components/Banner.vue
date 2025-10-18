@@ -1,5 +1,5 @@
 <template>
-  <section class="hero-section">
+  <section class="hero-section" :style="{ backgroundImage: `url(${bannerImage})` }">
     <div class="text-container">
       <div class="text-side">
         <h1 class="hero-title">Диагностика</h1>
@@ -18,8 +18,9 @@
 export default {
   name: 'Banner',
   data() {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     return {
-      bannerImage: '/files/banners/banner1.webp'
+      bannerImage: isLocal ? 'http://localhost:8081/banners/banner1.webp' : '/files/banners/banner1.webp'
     }
   },
   methods: {
@@ -32,10 +33,8 @@ export default {
 
 <style scoped>
 .hero-section {
-  width: 90%;
-  margin-left: 10%;
+  width: 100%;
   height: 100%;
-  background-image: url('/files/banners/banner1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -45,6 +44,7 @@ export default {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
+  margin: 40px 20px 20px 40px;
 }
 
 .text-container {

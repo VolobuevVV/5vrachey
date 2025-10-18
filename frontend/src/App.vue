@@ -12,6 +12,19 @@ import HeaderPanel from './components/HeaderPanel.vue'
 </template>
 
 <style>
+/* Скрыть скроллбары но оставить функциональность скролла */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+body {
+  -ms-overflow-style: none;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -22,10 +35,15 @@ html, body {
 
 #app {
   min-height: 100vh;
-  min-width: 100vw;
   display: flex;
   flex-direction: column;
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Глобальный box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 </style>
