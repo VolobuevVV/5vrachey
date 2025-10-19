@@ -39,10 +39,6 @@
               </div>
             </div>
           </div>
-
-          <div class="disclaimer">
-            <strong>Условия использования</strong>
-          </div>
         </div>
       </div>
     </div>
@@ -173,12 +169,4 @@ export default {
   font-weight: 600;
 }
 
-.disclaimer {
-  margin-top: 2rem;
-  font-size: 0.8rem;
-  color: #777;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 1rem;
-  text-align: center;
-}
 </style>
