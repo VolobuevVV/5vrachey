@@ -4,6 +4,9 @@
     <div class="content-section">
       <Tabs />
       <AboutSection />
+      <DoctorsCarousel />
+      <LocationMap />
+      <JoinTeamBanner />
     </div>
     <FooterPanel />
   </div>
@@ -16,10 +19,16 @@ import FooterPanel from './FooterPanel.vue'
 import BannerFullWidth from "@/components/BannerFullWidth.vue";
 import Tabs from "@/components/Tabs.vue";
 import AboutSection from "@/components/AboutSection.vue";
+import DoctorsCarousel from "@/components/DoctorsCarousel.vue";
+import JoinTeamBanner from "@/components/JoinTeamBanner.vue";
+import LocationMap from "@/components/LocationMap.vue";
 
 export default {
   name: 'MainPage',
   components: {
+    LocationMap,
+    JoinTeamBanner,
+    DoctorsCarousel,
     AboutSection,
     Tabs,
     BannerFullWidth,
