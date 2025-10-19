@@ -132,7 +132,6 @@ export default {
 <style scoped>
 .doctors-list {
   width: 100%;
-  padding: 2rem;
 }
 
 .doctors-title {
@@ -192,23 +191,4 @@ export default {
   font-size: 1.1rem;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  .doctors-list {
-    padding: 1rem;
-  }
-
-  .filters-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .filter-select {
-    min-width: 250px;
-  }
-
-  .doctors-grid {
-    grid-template-columns: 1fr;
-  }
-}
 </style>

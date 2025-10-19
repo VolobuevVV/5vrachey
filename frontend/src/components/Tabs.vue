@@ -28,10 +28,10 @@ export default {
   },
   data() {
     return {
-      activeTab: 'doctors',
+      activeTab: 'departments',
       tabs: [
-        { id: 'doctors', title: 'Врачи', component: 'DoctorsList' },
-        { id: 'departments', title: 'Отделения', component: 'DepartmentsList' }
+        { id: 'departments', title: 'Отделения', component: 'DepartmentsList' },
+        { id: 'doctors', title: 'Врачи', component: 'DoctorsList' }
       ]
     }
   },

@@ -3,6 +3,7 @@
     <BannerFullWidth/>
     <div class="content-section">
       <Tabs />
+      <AboutSection />
     </div>
     <FooterPanel />
   </div>
@@ -14,10 +15,12 @@ import DepartmentsGrid from './DepartmentsGrid.vue'
 import FooterPanel from './FooterPanel.vue'
 import BannerFullWidth from "@/components/BannerFullWidth.vue";
 import Tabs from "@/components/Tabs.vue";
+import AboutSection from "@/components/AboutSection.vue";
 
 export default {
   name: 'MainPage',
   components: {
+    AboutSection,
     Tabs,
     BannerFullWidth,
     Banner,

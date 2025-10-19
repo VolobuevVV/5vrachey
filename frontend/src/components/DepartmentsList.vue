@@ -6,10 +6,14 @@
         v-for="department in departments"
         :key="department.id"
         class="department-item"
-        :style="{ backgroundColor: department.color }"
         @click="goToDepartment(department.id)"
       >
-        {{ department.name }}
+        <div class="department-icon">
+          <img :src="getDepartmentIcon(department.id)" :alt="department.name">
+        </div>
+        <h3 class="department-name">{{ department.name }}</h3>
+        <p class="department-description">Современное оборудование и квалифицированные специалисты</p>
+        <button class="select-button">Выбрать</button>
       </div>
     </div>
     <div class="hero-widget">
@@ -29,6 +33,14 @@ export default {
     const router = useRouter()
     const departments = ref([])
 
+    const getDepartmentIcon = (departmentId) => {
+      try {
+        return new URL(`/src/assets/icons/${departmentId}.svg`, import.meta.url).href
+      } catch (error) {
+        return new URL(`/src/assets/icons/default.svg`, import.meta.url).href
+      }
+    }
+
     const goToDepartment = (departmentId) => {
       router.push(`/department/${departmentId}`)
     }
@@ -39,15 +51,6 @@ export default {
         departments.value = await response.json()
       } catch (error) {
         console.error('Ошибка загрузки отделений:', error)
-        // Заглушка на случай ошибки
-        departments.value = [
-          { id: 1, name: 'Терапия', color: '#e3f2fd' },
-          { id: 2, name: 'Кардиология', color: '#ffebee' },
-          { id: 3, name: 'Неврология', color: '#e8f5e8' },
-          { id: 4, name: 'Гастроэнтерология', color: '#fff3e0' },
-          { id: 5, name: 'Офтальмология', color: '#f3e5f5' },
-          { id: 6, name: 'Отоларингология', color: '#e0f2f1' }
-        ]
       }
     }
 
@@ -57,7 +60,8 @@ export default {
 
     return {
       departments,
-      goToDepartment
+      goToDepartment,
+      getDepartmentIcon
     }
   }
 }
@@ -66,7 +70,6 @@ export default {
 <style scoped>
 .departments-list {
   width: 100%;
-  padding: 2rem;
 }
 
 .departments-title {
@@ -79,30 +82,77 @@ export default {
 
 .departments-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.8rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .department-item {
-  padding: 1rem;
-  border-radius: 8px;
+  background: white;
+  border: 2px solid rgb(6, 113, 133);
+  border-radius: 15px;
+  padding: 2rem;
   transition: all 0.3s ease;
   text-align: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  color: rgb(0, 52, 73);
-  font-size: 1.1rem;
-  min-height: 60px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  min-height: 280px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .department-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.department-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.department-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.department-name {
+  color: rgb(0, 52, 73);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.department-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.select-button {
+  background: rgb(6, 113, 133);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 160px;
+}
+
+.select-button:hover {
+  background: rgba(6, 113, 133, 0.9);
 }
 
 .hero-widget {
@@ -130,31 +180,5 @@ export default {
   font-size: 1.1rem;
   font-weight: 600;
   color: #003449;
-}
-
-/* Адаптивность */
-@media (max-width: 1024px) {
-  .departments-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .departments-list {
-    padding: 1rem;
-  }
-
-  .departments-container {
-    grid-template-columns: 1fr;
-  }
-
-  .departments-title {
-    font-size: 1.5rem;
-  }
-
-  .hero-widget {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
 }
 </style>
